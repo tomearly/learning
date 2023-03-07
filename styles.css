@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+li:has(a) {
+    list-style-type: square;
+    font-size: 24px;
+}
+
+.footer-container {
+    container-type: inline-size;
+    container-name: footer-container;
+}
+
+.container {
+    container-type: inline-size;
+    container-name: main-container;
+}
+
+@container main-container (min-width: 500px) {
+    div {
+        display: flex;
+    }
+    :is(header, footer, main, aside) {
+        flex: 1;
+        height: calc(100dvh);
+    }
+    :is(header, footer, main, aside) li{
+        font-style: italic;
+    }
+}
+
+@container footer-container (min-width: 500px) {
+    ul {
+        display: flex;
+    }
+}
+
+@container footer-container (min-width: 800px) {
+    ul {
+        color: orange;
+    }
+}
+
+:is(header, footer) {
+    background-color: lightblue;
+}
