@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    height: 100dvh;
 }
 
 li:has(a) {
@@ -13,36 +14,99 @@ li:has(a) {
     container-name: footer-container;
 }
 
-.container {
+.main-container {
     container-type: inline-size;
     container-name: main-container;
-}
-
-@container main-container (min-width: 500px) {
-    div {
-        display: flex;
-    }
-    :is(header, footer, main, aside) {
-        flex: 1;
-        height: calc(100dvh);
-    }
-    :is(header, footer, main, aside) li{
-        font-style: italic;
-    }
-}
-
-@container footer-container (min-width: 500px) {
-    ul {
-        display: flex;
-    }
-}
-
-@container footer-container (min-width: 800px) {
-    ul {
-        color: orange;
-    }
 }
 
 :is(header, footer) {
     background-color: lightblue;
 }
+
+@container main-container (max-width: 499px) {
+
+    /* header:hover {
+        background: orange;
+    } */
+
+    div:has(header:hover) {
+        background: orange;
+    }
+
+    div {
+        height: 100dvh;
+        display: grid;
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 150px 1fr;
+        grid-template-areas: "header header header"
+                             "main main main"
+                             "main main main"
+                            "footer footer footer";
+    }
+
+    header {
+        grid-area:  header; 
+        background-color: #8ca0ff;
+    }
+
+    aside {
+        position: fixed;
+        top: 50px;
+        left: 0px;
+        height: calc(100dvh - 80px);
+        transform: translateX(-400px);
+        transition: all 500ms ease-in-out;
+    }
+
+    main {
+        grid-area: main;
+        background-color: transparent;
+        transition: all 500ms ease-in-out;
+    }
+
+    footer {
+        grid-area: footer;
+        background-color: #8cffa0;
+    }
+}
+
+@container main-container (min-width: 500px) {
+
+    div:has(header:hover) {
+        background: orange;
+    }
+
+    div {
+        height: 100dvh;
+        display: grid;
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 150px 1fr;
+        grid-template-areas: "header header header"
+                             "aside main main"
+                             "aside main main"
+                             "footer footer footer";
+    }
+
+    header {
+        grid-area:  header; 
+        background-color: #8ca0ff;
+    }
+
+    aside {
+        transition: all 500ms ease-in-out;
+        grid-area: aside;
+        background-color: #ffa08c;
+    }
+
+    main {
+        grid-area: main;
+        background-color: transparent;
+        transition: all 500ms ease-in-out;
+    }
+
+    footer {
+        grid-area: footer;
+        background-color: #8cffa0;
+    }
+}
+
